@@ -21,12 +21,17 @@
 | Automatic session hook | `session-start-check.sh`, wired in `../../source-vision/.claude/settings.json` |
 | Main understanding document | `01-Requirement-Understanding.md` (+ generated `.docx`) |
 | Open questions | `02-Open-Questions.md` (+ generated `.docx`) |
+| **Scope-review decision record** | `07-Scope-Review-and-Decisions-Sep-2026.md` — locked (L1–L25) + open (O1–O16) decisions |
+| Client-facing source docs | `sources/` — MVP/Overview v1 & v2 PDFs, Blue Virtue Scope Review 31 Aug |
+| Internal PM pack | `pm-pack/` — Decision Log v1 (`.xlsx`), Project Bible v1 (`.docx`) |
 | Word build script | `build-docs.sh` (+ `tools/md2html.py`) |
 | Change log | `03-Change-Log.md` |
 | Design skill | `../skills/source-vision-design/SKILL.md` |
 | Functionality skill | `../skills/source-vision-functionality/SKILL.md` |
 
-The baseline currently covers **105 files**. Change the watched folder with `SV_DOC_ROOT=/other/path`.
+The client-file baseline currently covers **105 files**. Change the watched folder with `SV_DOC_ROOT=/other/path`.
+
+> **Standing rule since 31 Aug 2026 (L25):** maintain the **Development & IP Register** (the `pm-pack` Decision Log's "IP Register" sheet) from day 1 — log every new Source Vision component (component · origin · developer · source/dependency · repo/location · status). Entries imply **no** ownership or revenue position. No GRS lists, templates, customer/consumer data, source code or IP may be reused unless confirmed **in writing**.
 
 ---
 

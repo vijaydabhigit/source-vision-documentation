@@ -2,7 +2,9 @@
 
 **Date:** 12 August 2026
 **From:** Development team (Nexuslink)
-**Last updated:** 13 August 2026 — Q15 to Q20 added while building Wave 1; Q2 and Q11 marked answered. **Q19 and Q20 are blocking.**
+**Last updated:** 2 September 2026 — after the **Blue Virtue Scope Review & Alignment Notes (31 Aug 2026)** and the v2 module docs. Q1, Q4 and Q13 now answered (see below). A new set of September open decisions (O1–O16) and the static-HTML-vs-Laravel build-approach conflict are tracked in **[07-Scope-Review-and-Decisions-Sep-2026.md](07-Scope-Review-and-Decisions-Sep-2026.md)** — read that alongside this file.
+
+**Earlier note (13 Aug):** Q15 to Q20 added while building Wave 1; Q2 and Q11 marked answered. **Q19 and Q20 are blocking.**
 **Please note:** Questions Q1 to Q6 and Q14 are **blocking**. We can start the design system and login screen without answers, but we cannot finish the package, plan and admin screens until these are answered.
 
 Source marks used here are explained in [01-Requirement-Understanding.md](01-Requirement-Understanding.md#how-to-read-the-source-marks).
@@ -233,10 +235,10 @@ Both are on the protected Wave 1 list `[EP §6]`, and neither has a mockup:
 
 | Q | Topic | Blocking | Status | Answer |
 |---|---|---|---|---|
-| Q1 | Admin menu version | Yes | Waiting | |
+| Q1 | Admin menu version | Yes | **Answered** | Use the newer `Part_2` menu (Dashboard, Customers, Campaigns, Subscriptions, Leads, Requests, Content Library, User Management, Reports, Settings) — confirmed by the Wave 1 acceptance criteria in the Project Bible |
 | Q2 | Public website in scope | Yes | **Answered** | **In scope.** Public Homepage is a Wave 1 screen; Service Landing Page template ×8 is Wave 2 `[EP §6]` |
 | Q3 | Toggle vs request/status | Yes | Waiting | |
-| Q4 | Final mandatory screens | Yes | Waiting | |
+| Q4 | Final mandatory screens | Yes | **Answered** | Wave 1 is now the 12-screen demo storyline in MVP Module List v2 (Login → Customer → Services/Plans → Request → Scratch/Lead Gen → Reporting → Admin → White-label + Platform Settings; Homepage deprioritised). eMagazine excluded |
 | Q5 | Pricing conflicts | Yes | Waiting | |
 | Q6 | Space Grotesk vs Inter | Yes | Waiting | |
 | Q7 | Video + dashboard embed | No | Waiting | |
@@ -245,7 +247,7 @@ Both are on the protected Wave 1 list `[EP §6]`, and neither has a mockup:
 | Q10 | Timeline | No | Waiting | |
 | Q11 | Homepage logos and stats | No | **Answered** | **C5** — neutral placeholders replace the real logos. **C6** — the statistics are illustrative, not audited. Both applied on the built homepage |
 | Q12 | Document language | No | Waiting | |
-| Q13 | Demo hosting | No | Waiting | |
+| Q13 | Demo hosting | No | **Answered** | Blue Virtue VPS + source-vision.com on Cloudflare DNS — MVP infrastructure only, not a production hosting decision (L24) |
 | Q14 | Responsive designs for tablet/mobile (Blue Virtue) | **Yes** | Waiting | |
 | Q15 | Public site: no footer, no hero imagery, logo clear space | No | Waiting | Built to the nearest documented rule `[TEAM]` |
 | Q16 | Google / TikTok brand marks as service icons | No | Waiting | Neutral outline icons used for now `[TEAM]` |

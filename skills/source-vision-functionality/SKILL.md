@@ -1,6 +1,6 @@
 ---
 name: source-vision-functionality
-description: Source Vision functional and business rules — the three portals (Customer, Admin, Settings/Development), the Services vs Packages vs Plans model, campaign request statuses, screen-by-screen requirements, user roles, dummy-data rules, the embedded Meneer Online reporting iframe, and which logic is reused from the older GRS Online project. Use this skill whenever building or reviewing routes, controllers, models, migrations, seeders, Inertia pages, permissions, workflows, statuses or business logic for Source Vision, and whenever deciding whether a feature belongs in the September MVP or the roadmap.
+description: Source Vision functional and business rules — the three portals (Customer, Admin, Platform Settings), the Services vs Packages vs Plans model, campaign request statuses, screen-by-screen requirements, user roles, dummy-data rules, the natively-built campaign reporting dashboard, and which logic is reused from the older GRS Online project. Use this skill whenever building or reviewing routes, controllers, models, migrations, seeders, Inertia pages, permissions, workflows, statuses or business logic for Source Vision, and whenever deciding whether a feature belongs in the September MVP or the roadmap.
 ---
 
 # Source Vision — Functionality & Business Rules
@@ -32,26 +32,38 @@ This **supersedes** Execution Plan v1.0 §3.1 (which specified static HTML for P
 
 The stage sequence, gates and milestone dates from the Execution Plan are **unchanged**: build starts Mon 17 Aug, design cut-off Wed 20 Aug, demo live Tue 1 Sep.
 
-### Wave structure — build in this order `[EP §6]`
+### Wave structure — build in this order
 
-- **Wave 1 (protected, live 1 Sep) — nine screens:** Login + demo role switcher · Public Homepage · Customer Dashboard · Marketing Services catalogue · Marketing Packages (8 cards, €129–€849) · Marketing Plans (5 tiers, €199–€1,299) · Admin Dashboard · Development/Settings Portal overview · White-Label configuration
-- **Wave 2 (2–15 Sep):** Campaign Request Flow + My Requests · Campaign Reporting Dashboard · Notifications panel · Service Landing Page template ×8 · Upgrade Your Plan · Scratch Game Overview · Landing Page/Lead-Gen Overview
-- **Wave 3 (16–30 Sep):** Newsletter Overview · Admin Customers · Admin Subscriptions & Plans/Pricing · Admin Requests · Admin Leads · Admin Campaigns · User Management + role matrix · Content Library · Contact · My Account · remaining Dev Portal sub-screens
+> **REVISED 31 Aug 2026 after the Blue Virtue Scope Review `[BV-SR]` `[MVP-v2]`.** Wave 1 is now ordered as the **10-minute buyer demo storyline**, and three screens (Campaign Request Flow, Scratch Game / Lead Gen, Campaign Reporting) were **pulled forward from Wave 2 into Wave 1** at demo depth. Full record: [07-Scope-Review-and-Decisions-Sep-2026.md](../../documents/07-Scope-Review-and-Decisions-Sep-2026.md).
 
-Anything not on these lists is a **roadmap entry shown inside the Development Portal**, not a build item.
+- **Wave 1 (protected, live 1 Sep) — twelve screens, in demo storyline order:**
+  1. Login & demo role switcher →
+  2. Customer Dashboard →
+  3. Services Catalogue · Marketing Packages (8 cards) · Marketing Plans (5 tiers, €199–€1,299) →
+  4. **Campaign Request Flow** *(moved forward — demo depth)* →
+  5. **Scratch Game / Lead Generation** *(moved forward — demo depth)* →
+  6. **Campaign Reporting Dashboard** *(moved forward — demo depth, built natively — see §8)* →
+  7. Admin Dashboard →
+  8. White-Label Configuration · **Platform Settings** →
+  - Public Homepage — **kept in Wave 1 but deprioritised**; complete it after the storyline screens; trim first if capacity is tight `[BV-SR]`
+- **Wave 2 (after the demo build):** Landing Page/Lead-Gen Overview · Notifications panel · Service Landing Page template ×8 · Upgrade Your Plan
+- **Wave 3 (as time allows):** Newsletter Overview · Admin Customers · Admin Subscriptions & Plans/Pricing · Admin Requests · Admin Leads · Admin Campaigns · User Management + role matrix · Content Library · Contact · My Account · remaining Platform Settings sub-screens
+
+Anything not on these lists is a **roadmap entry shown inside Platform Settings**, not a build item.
 
 Other positions set by the plan and the decisions register that override earlier assumptions in this skill:
 
 | Item | Position |
 |---|---|
-| **S1** | Wave 1 is a protected **nine-screen** list — see §7 below |
+| **S1** | Wave 1 is a protected **twelve-screen** storyline list (revised 31 Aug) — see the Wave structure above and §7 |
 | **C3** | Taxonomy confirmed: **Services / Packages / Plans**. Use the five customer-facing plan names everywhere and rewrite the admin dummy data to match |
-| **C4** | **eMagazine is withdrawn** — it appears nowhere in Wave 1; record it as a roadmap service |
-| **C1 / C2** | Franchise plan = **€999** (correct the Upgrade screen). The €299 package vs €99 add-on difference is intentional bundled pricing |
-| **D1** | **Space Grotesk everywhere**, including buttons. The "Inter" reference is a leftover |
+| **C4** | **eMagazine is withdrawn** (L9) — it appears nowhere in Wave 1; record it as a roadmap service |
+| **L17** | **Pricing shown = example monetisation model, configurable by the platform owner** (Blue Virtue, 31 Aug). Show a small "example configuration" label wherever plan/package pricing appears |
+| **C1 / O1 / O2** | Default Franchise plan = **€999** (correct the Upgrade screen). Franchise €999 vs €1,049 (O1) and Custom Campaign Support €299 vs €99 (O2) remain **open** in the Decision Log — seed the €999/Plans-page values and leave a `// TODO O1`/`// TODO O2` marker |
+| **D1 / O5** | Default **Space Grotesk everywhere**, including buttons; the "Inter" reference is a leftover. Confirmation still open (O5) |
 | **D5** | Toggles stay on commercial cards; request/status chips on the dashboard services grid — see §6 |
-| **S5** | Campaign Planning Tool, Email Marketing and CMS Management are **dropped from the interface** and become roadmap modules in the Development Portal |
-| **S6** | Reporting dashboard — **conflict, pending** — see §8 |
+| **S5** | Campaign Planning Tool, Email Marketing and CMS Management are **dropped from the interface** and become roadmap modules in Platform Settings |
+| **S6 / L6** | Reporting dashboard — **RESOLVED: build natively at demo depth, in Wave 1**. The Meneer Online iframe is rejected — see §8 |
 | **X4** | The GRS Mailsystem at `grsonline.nl` is **still live and still collecting real email addresses**. Treat as **read-only**. Reference screenshots only, and only after real recipient data is removed |
 
 Decisions are due **Fri 14 Aug 2026**; unanswered items proceed on the NexusLink default. Build starts **Mon 17 Aug**; design cut-off **Wed 20 Aug**; demo live **Tue 1 Sep**.
@@ -98,7 +110,7 @@ Yes → MVP. No → roadmap. `[PB §2]`
 
 Full SaaS architecture · full multi-tenant backend · full invoicing · complete API integrations · complete Print.com integration · full AI functionality · complete rebuild of existing systems · advanced CRM integrations · full marketplace.
 
-Show these as **roadmap items** on the Development/Settings dashboard instead. `[PB §5]` `[PB §7.15]`
+Show these as **roadmap items** in **Platform Settings** instead. `[PB §5]` `[PB §7.15]`
 
 ---
 
@@ -108,7 +120,9 @@ Show these as **roadmap items** on the Development/Settings dashboard instead. `
 |---|---|---|---|
 | **Customer Portal** | End customer (e.g. a shop) | customers can easily understand and buy marketing services | Dashboard, service selection, campaign requests, reports, leads |
 | **Admin Portal** | The buyer's staff (agency/franchise HQ) | one company can manage many customers and services centrally | Accounts, subscriptions, campaign activity, service requests |
-| **Settings / Development Portal** | Buyer's technical owner | the platform can be fully rebranded and extended | White-label setup, logo/colours, modules, roles, integrations |
+| **Platform Settings** (Platform Owner) | Buyer's technical owner | the platform can be fully rebranded and extended | White-label setup, logo/colours, modules, roles, integrations |
+
+> **Naming — LOCKED 31 Aug 2026 (L16) `[BV-SR]`.** The third portal is **Platform Settings** (persona: **Platform Owner**). Do **not** call it "Developer view", "Development Portal" or "Dev Portal" anywhere — Blue Virtue explicitly renamed it. The three portals are **Customer Portal · Admin Portal · Platform Settings**.
 
 Login should offer an **optional role switch for demo purposes** so a presenter can jump between portals quickly. `[PB §7.1]`
 
@@ -217,12 +231,12 @@ Brief states screens **1–4 are mandatory**; the rest are undecided `[PB §7]`.
 | 6 | Newsletter Overview | Medium | Planned/sent/draft, stats, approval status | `[PB §7.6]` |
 | 7 | Scratch Game Overview | High | Key differentiator; participants, emails collected, prize, conversion | `[PB §7.7]` |
 | 8 | Landing Page / Lead Gen | Medium | 5 page examples, views/signups/conversion/leads | `[PB §7.8]` |
-| 10 | Campaign Reporting | Special | **Embedded iframe — do not build.** See §8 | `[PB §7.10]` `[PB §10]` |
-| 11 | Admin Dashboard | High | KPIs + tables, see §7.2 | `[PB §7.11]` `[IMG:Part_2/Admin_Dshboard]` |
+| 10 | Campaign Reporting | **Wave 1 (demo depth)** | **Build natively — iframe rejected (L6).** See §8 | `[PB §7.10]` `[BIBLE]` |
+| 11 | Admin Dashboard | **Wave 1** | KPIs + tables, see §7.2 | `[PB §7.11]` `[IMG:Part_2/Admin_Dshboard]` |
 | 12 | Account Management | High | 10 fields, 5 actions | `[PB §7.12]` |
 | 13 | Service / Package Management | Medium | Admin CRUD for services/packages | `[PB §7.13]` |
 | 14 | White-Label Settings | **Critical for sales story** | See §9 | `[PB §7.14]` `[IMG:Part_2/White_Label_Portal]` |
-| 15 | Development / Settings Dashboard | Medium | Modules, integrations, system status, roadmap | `[PB §7.15]` |
+| 15 | **Platform Settings** (was "Development / Settings") | **Wave 1** | Modules, integrations, system status, roadmap — Platform Owner view (L16) | `[PB §7.15]` |
 | — | Notifications "Action Required" | Medium | Design-only screen, see §7.3 | `[IMG:Notifcations_Action quired]` |
 | — | Public website / homepage | **Scope unclear — Q2** | Design-only | `[IMG:Homepage_Soruce_Vision]` |
 
@@ -252,33 +266,20 @@ This pairs naturally with the request/status logic in §6. `[TEAM]`
 
 ---
 
-## 8. Campaign Reporting — CONFLICT, decision pending
+## 8. Campaign Reporting — RESOLVED: build natively, Wave 1, demo depth
 
-> ⚠ **Two positions exist. Do not build this screen until it is resolved.**
+> ✅ **DECISION LOCKED (register L6). The Meneer Online iframe is rejected.** Build the **Campaign Reporting Dashboard natively, on-brand, in English, with dummy data** — and it is now a **Wave 1** screen (pulled forward on 31 Aug, L14). Full record: [07-Scope-Review-and-Decisions-Sep-2026.md](../../documents/07-Scope-Review-and-Decisions-Sep-2026.md).
 >
-> - **Client brief `[PB §10]` — this is a written REQUIREMENT, not a suggestion.** The brief carries a heading **"Integration Requirements"** with five imperative bullets: embed via iframe · clean page with no header or footer · remove irrelevant widgets · connect the required analytics accounts · apply Source Vision brand colours. It also states Ruben maintains it *"after the integration is complete"*. It is the most operationally specific instruction in the entire brief. **Dropping it requires written client approval — it is not a technical preference.**
-> - **The brief also contradicts itself on which screen this is.** The block is headed "Customer Dashboard", but screen 2 is also the Customer Dashboard and is assigned to Blue Virtue with seven platform-data blocks. Our reading `[TEAM]`: the embed belongs to the **Campaign Reporting Dashboard**, because (a) the instruction sits inside `[PB §7.10]`, (b) screen 2's blocks need platform data no analytics tool holds, and (c) §7.10 asks for exactly the "META Stats, Google Stats, Website Stats" such a dashboard produces. Counter-evidence: the supplied recording is named `Customer_Dashboard.mov`, still unviewed.
-> - **NexusLink Execution Plan v1.0, §11.2 + register item S6 (12 Aug 2026):** build the reporting screen **natively, on-brand and in English**, and record the Meneer Online integration as a **roadmap item**. Their stated reasons: the dashboard is in Dutch, it pulls live analytics (which breaks the dummy-data-only rule `[PB Rule 4]`), it shows "Data niet beschikbaar" without connected accounts, and it is off-brand.
-> - The plan also notes the brief is genuinely ambiguous about **which** screen the iframe instruction applies to — the instruction sits under a "Customer Dashboard" heading immediately after the Campaign Reporting section.
-> - Per the Execution Plan, the reporting dashboard is a **Wave 2** screen, not Wave 1.
->
-> Awaiting the client's answer to S6 (due Fri 14 Aug 2026). Until then, build neither version.
+> **Why the iframe was rejected:** the Meneer Online dashboard is in Dutch, pulls **live** analytics (which breaks the dummy-data-only rule `[PB Rule 4]`), shows "Data niet beschikbaar" without connected accounts, and is off-brand. A native screen with consistent dummy numbers demos better and stays on-brand.
 
-The original client constraint, for reference. The customer analytics dashboard is **built and hosted by external partner Meneer Online** and is already production-ready.
+### What to build (Wave 1, demo depth) `[BIBLE]`
+One dashboard page. Cross-channel results with internally-consistent dummy numbers: emails sent, open rate, click rate, leads generated, scratch participants, landing-page signups, best-performing campaigns (top 3), plus META / Google / website stats as separate stat tiles. Static charts — no live data, no real analytics accounts.
 
-| Rule | Detail |
-|---|---|
-| Integration | Embed via **iframe** |
-| Page | Dedicated **blank page, no header, no footer** |
-| Backend | **No additional backend or database required** — it pulls data itself via API from each client's analytics accounts (e.g. Google Analytics), updating almost instantly |
-| Responsive | Already responsive on mobile and tablet — do not restyle |
-| Branding | Each client can have their own branding/colours; apply **Source Vision brand colours** |
-| Cleanup | Remove irrelevant widgets/data; connect required analytics accounts |
-| Login | Users reach it **without a separate login** |
-| Ownership | **Ruben** maintains it after integration |
+### Phase 2 note — do NOT quote a custom analytics engine yet
+For the **future platform**, reporting is a **"Reporting Layer"**, and Blue Virtue has existing dashboard technology through its network. Their tech must be **assessed for reuse/integration before any custom analytics build is scoped or quoted** (open item **O9**). `[BV-SR]` `[OV-v2]`
 
-Do not attempt to replicate its charts natively. `[TEAM]`
-A 29 MB screen recording exists (`Dashboard_Screenrecording/Customer_Dashboard.mov`) — **not yet reviewed**, no video tooling available. Q7.
+### Historical reference — the original brief instruction (now superseded for the demo)
+The brief `[PB §10]` originally asked to embed the Meneer Online dashboard via iframe (blank page, no header/footer, Source Vision colours, Ruben maintains it). That is retained only as background; the demo does **not** embed it. The old ambiguity about which screen the iframe belonged to is now moot. A 29 MB screen recording (`Dashboard_Screenrecording/Customer_Dashboard.mov`) remains unreviewed (Q7).
 
 ---
 
@@ -363,7 +364,7 @@ If we reuse GRS logic, we must not reuse this weakness. Always write save logic 
 
 ## 13. Deliverables due by beginning of September `[PB §17]`
 
-Development: working demo environment · Customer Portal · Admin Portal · Development/Settings Portal
+Development: working demo environment · Customer Portal · Admin Portal · Platform Settings (Platform Owner)
 Documentation: technical overview · user role/access matrix · roadmap overview · feature overview for buyers
 Sales (owner to confirm — Q8): demo storyline · product demo script · updated Acquire listing copy · screenshot set
 
@@ -378,7 +379,10 @@ Sales (owner to confirm — Q8): demo storyline · product demo script · update
 - [ ] Prices/labels/names come from config or seeder, never hardcoded `[DH §6]`
 - [ ] Statuses use exactly the 6 canonical names `[PB §7.5]`
 - [ ] Request/status logic used instead of a bare toggle `[QP-7]`
-- [ ] Reporting screen is an iframe embed, not a rebuild `[PB §10]`
+- [ ] Reporting screen is **built natively** with dummy data — the Meneer iframe is rejected (L6)
+- [ ] Third portal is called **Platform Settings**, never "Developer/Development" (L16)
+- [ ] Plan/package pricing carries the "example configuration" label (L17)
+- [ ] Every new component logged in the Development & IP Register (L25)
 - [ ] Anything derived from `[GRS]` is marked as such and flagged for confirmation
 - [ ] New ambiguity added to [02-Open-Questions.md](../../documents/02-Open-Questions.md)
 
@@ -392,3 +396,4 @@ Procedure: [04-Skill-Update-Rules.md](../../documents/04-Skill-Update-Rules.md)
 | Version | Date | Based on | Change |
 |---|---|---|---|
 | 1.0 | 2026-08-12 | 11-Aug ZIP snapshot + GRS overview | First version. Built from `[PB]`, `[QP]`, `[DH]`, `[GRS]` and 17 design images |
+| 1.1 | 2026-09-02 | Blue Virtue Scope Review 31 Aug `[BV-SR]` + MVP/Overview v2 `[MVP-v2]` `[OV-v2]` + Decision Log/Bible | Wave 1 re-ordered to the 10-min storyline; Campaign Request, Scratch Game and Reporting pulled into Wave 1; "Development/Settings Portal" → **Platform Settings**; Campaign Reporting **built natively** (Meneer iframe rejected, L6); pricing framed as example monetisation (L17); Development & IP Register from day 1 (L25). See [07-Scope-Review-and-Decisions-Sep-2026.md](../../documents/07-Scope-Review-and-Decisions-Sep-2026.md) |

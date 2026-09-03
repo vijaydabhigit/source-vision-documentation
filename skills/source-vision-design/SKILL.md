@@ -271,7 +271,7 @@ Write **mobile-first**: base classes are mobile, then `md:` and `lg:` add to the
 3. **No fixed pixel widths** on containers. Use `max-width`, flex or grid. Images and embeds get `max-width: 100%`.
 4. **Nothing important is hidden on mobile.** You may collapse, stack or move it behind a control, but a buyer must be able to reach every feature on a phone — the demo may well be shown on one.
 5. **Test all three widths** before calling a screen done.
-6. **The embedded Meneer Online reporting dashboard is already responsive** on mobile and tablet — do not restyle it, only size its iframe container. `[PB §10]`
+6. **The Campaign Reporting Dashboard is built natively** (the Meneer Online iframe was rejected — register L6, 31 Aug 2026) and is a **Wave 1** screen. Style its charts and stat tiles to the brand and make them responsive like any other screen. See `source-vision-functionality` §8 and [07-Scope-Review-and-Decisions-Sep-2026.md](../../documents/07-Scope-Review-and-Decisions-Sep-2026.md).
 7. Modals, dropdowns and date pickers must stay inside the viewport at every width.
 
 ---
@@ -283,7 +283,7 @@ The client states this explicitly:
 > The supplied screens are visual references intended to guide development... They **should not be treated as final functional specifications**. Features, workflows, labels, pricing, content, data and component behaviour **may change**. `[DH §6]`
 
 Therefore:
-1. **Never hardcode** prices, plan names, service names, counts or labels in a component. Read them from config, database or a seeder.
+1. **Never hardcode** prices, plan names, service names, counts or labels in a component. Read them from config, database or a seeder. **Pricing is an *example monetisation model*** (Blue Virtue, 31 Aug 2026 — L16/L17): show a small "example configuration, set by the platform owner" label wherever plan/package prices appear.
 2. Build reusable components (KpiCard, StatusChip, PlanCard, ServiceIcon) rather than copying a mockup pixel by pixel.
 3. When a mockup and a written document disagree, **the written document wins** and the difference is logged as an open question.
 

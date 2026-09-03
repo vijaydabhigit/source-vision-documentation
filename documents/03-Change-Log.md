@@ -261,6 +261,64 @@ It does **not** settle the question, because `[PB §10]` is still a written clie
 
 ---
 
+## 2026-09-02 — Version 1.5 — Blue Virtue Scope Review applied; Wave 1 re-prioritised; reporting resolved
+
+**Trigger:** A four-step document sequence was provided: (1) v1 client docs sent 12 Aug, (2) **Blue Virtue Scope Review & Alignment Notes, 31 Aug 2026** (client feedback), (3) the internal PM pack (Decision Log v1 + Project Bible v1, 1 Sep), (4) the **v2 client docs sent today, 2 Sep**. All read in full.
+
+**Source files added to the repo:**
+
+| File | Location |
+|---|---|
+| MVP Module List v1 (12 Aug) · Module Overview v1 (12 Aug) | `documents/sources/…_v1_12Aug2026.pdf` |
+| Blue Virtue Scope Review & Alignment Notes (31 Aug) | `documents/sources/…Scope_Review_Alignment_Notes_BlueVirtue_31Aug2026.docx` |
+| MVP Module List v2 (2 Sep) · Module Overview v2 (2 Sep) | `documents/sources/…_v2_02Sep2026.pdf` |
+| Decision Log v1 · Project Bible v1 (internal PM pack) | `documents/pm-pack/` |
+
+**Created:** `07-Scope-Review-and-Decisions-Sep-2026.md` — the consolidated record of the sequence, the locked decisions (L1–L25), the open decisions (O1–O16) and the build-approach conflict.
+
+**Changes (was → now):**
+
+| # | Item | Before | Now |
+|---|---|---|---|
+| 1 | **Wave 1 order** | Nine screens led by Public Homepage `[EP §6]` | **Twelve-screen 10-minute buyer storyline** (L13): Login → Customer → Services/Plans → Request → Scratch/Lead Gen → Reporting → Admin → White-label + Platform Settings. Campaign Request Flow, Scratch Game and Reporting **pulled forward into Wave 1** at demo depth (L14); **Public Homepage deprioritised** within Wave 1 (L15) `[BV-SR]` `[MVP-v2]` |
+| 2 | **Third portal name** | "Settings / Development Portal" (a.k.a. "Developer view") | **Platform Settings** (Platform Owner). Three portals = Customer · Admin · Platform Settings (L16). Renamed in the functionality skill, design skill and `CLAUDE.md` |
+| 3 | **Campaign Reporting** | Conflict, "build neither" (item S6) | **RESOLVED (L6): build natively, on-brand, dummy data, Wave 1, demo depth.** Meneer Online iframe **rejected**. Phase 2 reporting is a "Reporting Layer" — assess Blue Virtue's dashboard tech first (O9) `[BV-SR]` `[OV-v2]` |
+| 4 | **Pricing framing** | Prices treated as the model | **Example monetisation model, configurable by the platform owner** (L17). Show an "example configuration" label wherever pricing appears |
+| 5 | **Phase 2 positioning** | Presented as a 24-module build | **"Proposed Full Platform / Future Product Architecture" — framework only** (L19). No effort/cost figures client-facing until signed. Multi-tenancy/white-label moved to the top (L23); Integrations split into core/optional/API (L21); AI Assistant + Print Portal → roadmap (L20); GRS Data Migration → "Generic Data Import & Migration Tools" (L18); Content Library = simple asset organisation, legacy GRS folder excluded (L22) `[OV-v2]` |
+| 6 | **IP governance** | Not a standing rule | **Development & IP Register maintained from day 1** (L25); no GRS data/IP assumed unless confirmed in writing `[BV-SR]` |
+| 7 | **Demo hosting (Q13)** | Open | **Answered:** Blue Virtue VPS + source-vision.com on Cloudflare — MVP infra only (L24) |
+| 8 | **Admin menu (Q1)** | Assumption: newer `Part_2` menu | **Answered/confirmed** by the Wave 1 acceptance criteria in the Project Bible |
+| 9 | **Franchise / Custom Support pricing** | Skill said "intentional" (C1/C2) | Re-opened per the Decision Log: **O1** (€999 vs €1,049) and **O2** (€299 vs €99) are **awaiting the client**. Default to €999 / seed Plans-page values and leave `// TODO` markers |
+| 10 | ⚠ **Phase 1 build approach** | Repo built on Laravel 13 demo-mode (`06-MVP-Build-Approach.md`) | **Conflict flagged:** the Decision Log (L1) and Project Bible (§23) say Phase 1 = **static HTML, no framework**. The repo + `06-MVP-Build-Approach.md` say **Laravel 13 demo-mode**. Recommendation: keep Laravel demo-mode and correct the PM pack. **Needs Vijay's written confirmation** — recorded as open in doc 07 §5 |
+
+**Skills updated:** functionality (v1.1 — wave order, portal name, reporting resolution, pricing framing, IP register, checklist), design (reporting responsive rule + pricing label). `CLAUDE.md` (rule 10 rewritten; rules 14–17 added).
+**Questions closed:** Q1, Q4, Q13.
+**New open items:** O1–O16 (see doc 07) + the static-HTML-vs-Laravel build-approach conflict.
+
+---
+
+## 2026-09-02 — Version 1.6 — MVP build updated to the revised Wave 1 (3 new screens + renames)
+
+**Trigger:** Instruction to update the MVP design to the new features, on the existing Laravel demo-mode codebase (build-approach question answered: keep Laravel demo-mode). `check-sources.sh` returned MISSING SOURCE FOLDER (client folder not on this machine — exit 3, proceed).
+
+**Built / changed (was → now):**
+
+| # | Item | Before | Now |
+|---|---|---|---|
+| 1 | **Campaign Reporting** | `/reports` was a "Decision pending" stub; a test asserted it stayed unbuilt | **Built natively:** `Customer/Reporting.vue` — 6 stat tiles, cross-channel trend (AreaChart), leads-by-channel donut, META/Google/Website stat groups, top-3 campaigns table. New `reporting` data block, `DemoController@reports`, route → controller. Figures consistent with the dashboard (leads 428, open 42.6%). No iframe. [L6] [L14] |
+| 2 | **Campaign Request Flow** | Wave 2 stub | **Built** (`Customer/RequestFlow.vue`): interactive 4-step wizard (type → goal → briefing → submit) with visual success state, plus the six-status pipeline and recent requests. New `request_flow` data, `DemoController@requestFlow`, `/campaign-requests/new` → controller. [L14] |
+| 3 | **Scratch Game / Lead Gen** | No screen existed | **Built** (`Customer/ScratchGame.vue`): 4 summary tiles, games table (participants/emails/capture/status), prize setup. New `scratch_game` data, `DemoController@scratchGame`, new route `/lead-generation`. [L14] |
+| 4 | **Third portal name** | "Settings / Development Portal", demo role "Developer" | **Platform Settings** (Platform Owner) across `config/demo.php`, `DemoController`, `AdminLayout.vue`, `Dev/Overview.vue`, `Dev/WhiteLabel.vue`, and the role switcher label. [L16] |
+| 5 | **Pricing framing** | Plain prices | **"Example configuration"** label on Marketing Plans and Marketing Packages, from a new `pricing_note` data value. [L17] |
+| 6 | **Dashboard links** | — | Customer Dashboard lead panel now links to the reporting and lead-generation screens, so the storyline is clickable end to end |
+| 7 | **Tests** | Asserted reporting stays unbuilt | Rewritten: reporting built natively (no iframe), the 3 pulled-forward screens render, third portal named Platform Settings, and the six-status guard now also covers the new screens |
+
+**Wave 1 is now 12 storyline screens, all reachable and clickable.**
+
+**Skills updated:** none — these are rule *applications*, not rule changes (rules were updated in Version 1.5). **Verification:** `npm run build` passes (all pages compile); PHP/Composer are not available in this environment, so `php artisan test` must be run locally — the feature tests were updated to match.
+
+---
+
 <!--
 Template for the next entry — copy this block:
 
